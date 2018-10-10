@@ -55,6 +55,7 @@ docker run \
   $([ -f $RUN_DIR/env-development ] && echo "--volume $RUN_DIR/env-development:/s_vue_1st/env-development") \
   $([ -d $RUN_DIR/src ] && echo "--volume $RUN_DIR/src:/s_vue_1st/src") \
   $([ -d $RUN_DIR/dist ] && echo "--volume $RUN_DIR/dist:/s_vue_1st/dist") \
+  $([ -d $RUN_DIR/public ] && echo "--volume $RUN_DIR/public:/s_vue_1st/public") \
   --workdir $WORKDIR \
   --entrypoint sh \
   $IMAGE \
