@@ -31,10 +31,11 @@ mkdir -p $RUN_DIR/dist
 mkdir -p $RUN_DIR/node_modules/saavu-cbin-placeholder
 
 ARGS=${@:1}
-if [ "$1" = "install" -o "$1" = "add" -o "$1" = "" ]; then
+TWO="$1 $2"
+if [ "$TWO" = "yarn add" -o "$TWO" = "yarn install" ]; then
   # working with local packages (installing deps)
   WORKDIR="/ext";
-  CMD="yarn $ARGS"
+  CMD="$ARGS"
 else
   # working with packages already in the container
   WORKDIR="/s_vue_1st";
@@ -44,7 +45,6 @@ fi
 docker run \
   -u $UID:$(id -g $USER) \
   -e NODE_ENV=$NODE_ENV \
-  -e NUXT_PORT=$NUXT_PORT \
   $([ -z $RUN_IN_BG ] && echo '--rm' || echo '-d') \
   $([ ! -z $NO_TTY ] && echo '' || echo '-it') \
   $DOCKER_PARAM_NAME \
